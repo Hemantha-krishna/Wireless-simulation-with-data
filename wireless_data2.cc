@@ -98,11 +98,17 @@ void HelloWorldSender::ScheduleTx(void)
 
 void HelloWorldSender::SendPacket(void)
 {
-    Ptr<Packet> packet = Create<Packet>(m_packetSize);
+    // Create a packet with a payload containing "Hello world"
+    std::string message = "Hello world";
+    Ptr<Packet> packet = Create<Packet>(reinterpret_cast<const uint8_t*>(message.c_str()), message.size());
+
+    // Add UDP header to the packet
     UdpHeader udpHeader;
     udpHeader.SetSourcePort(0); // Set source port
     udpHeader.SetDestinationPort(0); // Set destination port
     packet->AddHeader(udpHeader);
+
+    // Send the packet
     m_socket->Send(packet);
 
     if (--m_numPackets > 0)
@@ -110,6 +116,7 @@ void HelloWorldSender::SendPacket(void)
         ScheduleTx();
     }
 }
+
 
 
 int main(int argc, char *argv[]) {
@@ -218,4 +225,3 @@ for (uint32_t i = 0; i < numNodes; ++i) {
 
     return 0;
 }
-
