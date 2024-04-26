@@ -34,3 +34,7 @@ The simulation can be customized by modifying the following parameters:
 - Application parameters: Packet size, number of packets, data rate, port numbers, etc.
 
 Additionally, you can modify the network topology, mobility models, or add additional applications or protocols as needed.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
